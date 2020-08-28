@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JComboBox;
 
 public class Payment {
 	private static JTextField textField;
@@ -34,6 +35,9 @@ public class Payment {
 		f.setSize(800, 600);
 		f.getContentPane().setLayout(null);
 		f.setTitle("버스 예약 시스템");
+		JComboBox<String> combo;
+
+
 		
 		JLabel l1 = new JLabel("카드 결제");
 		l1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,13 +88,13 @@ public class Payment {
 		JLabel l1_2 = new JLabel("카드 번호");
 		l1_2.setHorizontalAlignment(SwingConstants.CENTER);
 		l1_2.setFont(new Font("굴림", Font.BOLD, 14));
-		l1_2.setBounds(12, 140, 116, 49);
+		l1_2.setBounds(32, 140, 116, 49);
 		f.getContentPane().add(l1_2);
 		
 		JLabel l1_2_1 = new JLabel("유효 기간 월(MONTH)");
 		l1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 		l1_2_1.setFont(new Font("굴림", Font.BOLD, 14));
-		l1_2_1.setBounds(96, 229, 178, 49);
+		l1_2_1.setBounds(130, 229, 178, 49);
 		f.getContentPane().add(l1_2_1);
 		
 		textField_4 = new JTextField();
@@ -101,7 +105,7 @@ public class Payment {
 		JLabel l1_2_1_1 = new JLabel("유효 기간 년(YEAR)");
 		l1_2_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		l1_2_1_1.setFont(new Font("굴림", Font.BOLD, 14));
-		l1_2_1_1.setBounds(414, 229, 178, 49);
+		l1_2_1_1.setBounds(430, 229, 178, 49);
 		f.getContentPane().add(l1_2_1_1);
 		
 		textField_5 = new JTextField();
@@ -112,13 +116,13 @@ public class Payment {
 		JLabel l1_2_1_2 = new JLabel("카드 비밀번호");
 		l1_2_1_2.setHorizontalAlignment(SwingConstants.CENTER);
 		l1_2_1_2.setFont(new Font("굴림", Font.BOLD, 14));
-		l1_2_1_2.setBounds(31, 325, 178, 49);
+		l1_2_1_2.setBounds(62, 325, 178, 49);
 		f.getContentPane().add(l1_2_1_2);
 		
 		JLabel l1_2_1_1_1 = new JLabel("생년월일(YYYYMMDD)");
 		l1_2_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		l1_2_1_1_1.setFont(new Font("굴림", Font.BOLD, 14));
-		l1_2_1_1_1.setBounds(441, 325, 178, 49);
+		l1_2_1_1_1.setBounds(470, 325, 178, 49);
 		f.getContentPane().add(l1_2_1_1_1);
 		
 		textField_7 = new JTextField();
@@ -129,7 +133,7 @@ public class Payment {
 		JLabel l1_3 = new JLabel("총 결제금액");
 		l1_3.setHorizontalAlignment(SwingConstants.CENTER);
 		l1_3.setFont(new Font("굴림", Font.BOLD, 20));
-		l1_3.setBounds(43, 448, 128, 33);
+		l1_3.setBounds(53, 448, 128, 33);
 		f.getContentPane().add(l1_3);
 		
 		JLabel l1_3_1 = new JLabel("금액");
@@ -153,6 +157,12 @@ public class Payment {
 		passwordField_2 = new JPasswordField();
 		passwordField_2.setBounds(592, 186, 123, 33);
 		f.getContentPane().add(passwordField_2);
+		
+		String card[]= {"롯데","하나","국민","BC","신한","삼성","농협","현대","전북","수협","우리","광주","씨티"};
+		 combo = new JComboBox<String>(card);
+
+		combo.setBounds(287, 110, 185, 35);
+		f.add(combo);
 		
 		
 		

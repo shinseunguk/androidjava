@@ -18,6 +18,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		JFrame f = new JFrame();
+		f.getContentPane().setBackground(Color.WHITE);
 		f.setSize(800, 600);
 		f.setTitle("버스 예약 시스템");
 		f.getContentPane().setLayout(null);
