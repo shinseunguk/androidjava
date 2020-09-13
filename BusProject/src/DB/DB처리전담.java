@@ -3,68 +3,177 @@ package DB;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
 
 
-//íŠ¹ì •í•œ ë°©ë²•ì„ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤: ë°©ë²•(model, dbì²˜ë¦¬)í´ë˜ìŠ¤
-public class DBì²˜ë¦¬ì „ë‹´ {
-//DBì²˜ë¦¬í•˜ëŠ” ë°©ë²•ì´ 4ë‹¨ê³„ë¡œ ì •í•´ì ¸ ìˆë‹¤.
-	public void create(String user_id,String user_pw,String user_name, String user_birth,String user_pnumber,String user_email) throws ClassNotFoundException, SQLException {
-			System.out.println("DBì— ì €ì¥ ì²˜ë¦¬í•¨.");
-			//1. connector ì„¤ì •
-			Class.forName("com.mysql.jdbc.Driver");//connectorì˜ ì‹œì‘ì 
-			//ìë°”ì—ì„œëŠ” ì—ëŸ¬ê°€ ë„ˆë¬´ ë§ì´ ë°œìƒí•  ê²ƒ ê°™ì€ ìƒí™©ì—ì„œëŠ” ë°˜ë“œì‹œ
-			//ì—ëŸ¬ì²˜ë¦¬ë¥¼ ë°˜ë“œì‹œ í•´ì£¼ì–´ì•¼í•¨.
-			//ë„¤íŠ¸ì›Œí¬ì—°ê²°, dbì—°ê²°, íŒŒì¼ì—°ê²°, cpuì—°ê²°
-			System.out.println("1. connector ì„¤ì • ì„±ê³µ!");
-			//2. dbì—°ê²° 
-//			1)ip+port+dbëª…
+
+//Æ¯Á¤ÇÑ ¹æ¹ıÀ» Ã³¸®ÇÏ´Â Å¬·¡½º: ¹æ¹ı(model, dbÃ³¸®)Å¬·¡½º
+public class DBÃ³¸®Àü´ã {
+//DBÃ³¸®ÇÏ´Â ¹æ¹ıÀÌ 4´Ü°è·Î Á¤ÇØÁ® ÀÖ´Ù.
+	public void create(String user_id,String user_pw,String user_name, int user_birth,String user_pnumber,String user_email) throws ClassNotFoundException, SQLException {
+			System.out.println("DB¿¡ ÀúÀå Ã³¸®ÇÔ.");
+			//1. connector ¼³Á¤
+			Class.forName("com.mysql.jdbc.Driver");//connectorÀÇ ½ÃÀÛÁ¡
+			//ÀÚ¹Ù¿¡¼­´Â ¿¡·¯°¡ ³Ê¹« ¸¹ÀÌ ¹ß»ıÇÒ °Í °°Àº »óÈ²¿¡¼­´Â ¹İµå½Ã
+			//¿¡·¯Ã³¸®¸¦ ¹İµå½Ã ÇØÁÖ¾î¾ßÇÔ.
+			//³×Æ®¿öÅ©¿¬°á, db¿¬°á, ÆÄÀÏ¿¬°á, cpu¿¬°á
+			System.out.println("1. connector ¼³Á¤ ¼º°ø!");
+			//2. db¿¬°á 
+			//	1)ip+port+db¸í
 			//  2)username: root
 			//  3)password: 1234
 			String url ="jdbc:mysql://localhost:3366/profile";
 			String user ="root";
 			String passworld= "1234";
 			Connection con = DriverManager.getConnection(url, user, passworld);
-			System.out.println("2. shopì—°ê²° ì„±ê³µ!!");
+			System.out.println("2. shop¿¬°á ¼º°ø!!");
 			
 			
-			//dbì—°ë™ indexëŠ” 1ë¶€í„° ì‹œì‘ 
-			String sql = "insert into signup values (?, ?, ?, ?, ?, ?)";
+			//db¿¬µ¿ index´Â 1ºÎÅÍ ½ÃÀÛ 
+			String sql = "insert into payment values (?, ?, ?, ?, ?, ?)";
 			
-			//ì»´í“¨í„°ëŠ” ì´ ë¬¸ì¥ì„ ê·¸ëƒ¥ Stringìœ¼ë¡œ ì¸ì‹
+			//ÄÄÇ»ÅÍ´Â ÀÌ ¹®ÀåÀ» ±×³É StringÀ¸·Î ÀÎ½Ä
 			PreparedStatement ps = con.prepareStatement(sql);
-//			System.out.println(user_id);
-//			System.out.println(user_pw);
-//			System.out.println(user_name);
-//			System.out.println(user_birth);
-//			System.out.println(user_pnumber);
-//			System.out.println(user_email);
+
 			ps.setString(1, user_id);
 			ps.setString(2, user_pw);
 			ps.setString(3, user_name);
-			ps.setString(4, user_birth);
+			ps.setInt(4, user_birth); //int
 			ps.setString(5, user_pnumber);
 			ps.setString(6, user_email);
 			
-			System.out.println("3. SQLë¬¸ ìƒì„± ì„±ê³µ!!");
+			System.out.println("3. SQL¹® »ı¼º ¼º°ø!!");
 			
 			ps.executeUpdate();
-			System.out.println("4. SQLë¬¸ì„ mySQLë¡œ ë„¤íŠ¸ì›Œí¬ ì „ì†¡ ì„±ê³µ!!");
+			System.out.println("4. SQL¹®À» mySQL·Î ³×Æ®¿öÅ© Àü¼Û ¼º°ø!!");
 		}
 
 		
-			public void read() {
-				JOptionPane.showMessageDialog(null, "DBì— ê²€ìƒ‰ì²˜ë¦¬ í•¨.");
-			}
-			public void update() {
-				JOptionPane.showMessageDialog(null, "DBì— ìˆ˜ì •ì²˜ë¦¬ í•¨.");
-			}
-			public void delete() {
-				JOptionPane.showMessageDialog(null, "DBì— ì‚­ì œì²˜ë¦¬ í•¨.");
-			}
+	public int read(String id) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		System.out.println("1. connector¿¬°á ¼º°ø");
+		// 2. DB¿¬°á
+//		String url = "¿¬°áÇÏ´Â¹æ¹ı://ip/port/db¸í"
+		String url = "jdbc:mysql://localhost:3366/shop1";
+		String user = "root";
+		String password = "1234";
+		Connection con = DriverManager.getConnection(url, user, password);
+		System.out.println("2. DB¿¬°á ¼º°ø.");
+		// 3. sql¹®À» ¸¸µé¾î¼­ Àü¼Û
+		String sql = "select * from profile where user_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, id);
+		System.out.println("3. SQL»ı¼º ¼º°ø");
+		// 4. sql¹®Àº Àü¼Û
+		ResultSet rs = ps.executeQuery();
+		// selectÀÇ °á°ú´Â °Ë»ö°á°ú°¡ ´ã±ä Å×ÀÌºí
+		//
+		System.out.println("4. SQL¹® Àü¼Û ¼º°ø.");
+		int result = 0;// ¾øÀ½
+		if (rs.next()) {
+			System.out.println("°Ë»ö°á°ú o");
+			result = 1;// ÀÖÀ½
+			String id2 = rs.getString("id");
+			String pw = rs.getString("pw");
+			String name = rs.getString("name");
+			String tel = rs.getString("tel");
+			System.out.println("°Ë»ö°á°ú id: " + id2);
+			System.out.println("°Ë»ö°á°ú pw: " + pw);
+			System.out.println("°Ë»ö°á°ú name: " + name);
+			System.out.println("°Ë»ö°á°ú tel: " + tel);
+		} else {
+			System.out.println("°Ë»ö°á°ú x");
+		}
+		return result;
+		// 0ÀÌ ³Ñ¾î°¡¸é, °Ë»ö°á°ú ¾øÀ½.
+		// 1ÀÌ ³Ñ¾î°¡¸é, °Ë»ö°á°ú ÀÖÀ½
+
+	}
+	
+	
+
+	// ¾ÆÀÌµğ/pw ¸Â´ÂÁö ·Î±×ÀÎÃ³¸®
+	public boolean read(String id, String pw) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		System.out.println("1. connector¿¬°á ¼º°ø");
+		// 2. DB¿¬°á
+//			String url = "¿¬°áÇÏ´Â¹æ¹ı://ip/port/db¸í"
+		String url = "jdbc:mysql://localhost:3366/profile";
+		String user = "root";
+		String password = "1234";
+		Connection con = DriverManager.getConnection(url, user, password);
+		System.out.println("2. DB¿¬°á ¼º°ø.");
+		// 3. sql¹®À» ¸¸µé¾î¼­ Àü¼Û
+		String sql = "select * from profile where user_id = ? and user_pw = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, id);
+		ps.setString(2, pw);
+		System.out.println("3. SQL»ı¼º ¼º°ø");
+		// 4. sql¹®Àº Àü¼Û
+		ResultSet rs = ps.executeQuery();
+		// selectÀÇ °á°ú´Â °Ë»ö°á°ú°¡ ´ã±ä Å×ÀÌºí
+		System.out.println("4. SQL¹® Àü¼Û ¼º°ø.");
+		boolean result = false;// ¾øÀ½
+		if (rs.next()) {
+			result = true;// ÀÖÀ½
+		} else {
+		}
+		return result;
+		// false¸é ·Î±×ÀÎx
+		// true¸é ·Î±×ÀÎo
+
+	}
+
+	public void update(String id, String pw, String name, String tel) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		System.out.println("1. connector¿¬°á ¼º°ø");
+		// 2. DB¿¬°á
+//		String url = "¿¬°áÇÏ´Â¹æ¹ı://ip/port/db¸í"
+		String url = "jdbc:mysql://localhost:3366/shop1";
+		String user = "root";
+		String password = "1234";
+		Connection con = DriverManager.getConnection(url, user, password);
+		System.out.println("2. DB¿¬°á ¼º°ø.");
+		// 3. sql¹®À» ¸¸µé¾î¼­ Àü¼Û
+		String sql = "update profile set pw = ? , name = ? , tel = ?  where id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, pw);
+		ps.setString(2, name);
+		ps.setString(3, tel);
+		ps.setString(4, id);
+		System.out.println("3. SQL»ı¼º ¼º°ø");
+		// 4. sql¹®Àº Àü¼Û
+		ps.executeUpdate();
+
+		System.out.println("4. SQL¹® Àü¼Û ¼º°ø.");
+
+	}
+
+	public void delete(String id) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		System.out.println("1. connector¿¬°á ¼º°ø");
+		// 2. DB¿¬°á
+//		String url = "¿¬°áÇÏ´Â¹æ¹ı://ip/port/db¸í"
+		String url = "jdbc:mysql://localhost:3366/shop1";
+		String user = "root";
+		String password = "1234";
+		Connection con = DriverManager.getConnection(url, user, password);
+		System.out.println("2. DB¿¬°á ¼º°ø.");
+		// 3. sql¹®À» ¸¸µé¾î¼­ Àü¼Û
+		String sql = "delete from profile where id = ? ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, id);
+		System.out.println("3. SQL»ı¼º ¼º°ø");
+		// 4. sql¹®Àº Àü¼Û
+		ps.executeUpdate();
+
+		System.out.println("4. SQL¹® Àü¼Û ¼º°ø.");
+
+	}
 	
 
 }

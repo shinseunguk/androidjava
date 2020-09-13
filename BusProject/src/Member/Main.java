@@ -13,52 +13,51 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Main {
+class Main extends JFrame {
+	public Main() {
+	
+	JFrame f = new JFrame();
+	f.setSize(800, 600);
+	f.setTitle("¹ö½º ¿¹¾à ½Ã½ºÅÛ");
+	f.getContentPane().setLayout(null);
 
-	public static void main(String[] args) {
+	JLabel l1 = new JLabel("¹ö½º ¿¹¾à ½Ã½ºÅÛÀÔ´Ï´Ù.");
+	l1.setForeground(Color.BLUE);
+	l1.setFont(new Font("±¼¸²", Font.BOLD, 23));
+	l1.setHorizontalAlignment(SwingConstants.CENTER);
+	l1.setBounds(113, 0, 565, 62);
+	f.getContentPane().add(l1);
 
-		JFrame f = new JFrame();
-		f.getContentPane().setBackground(Color.WHITE);
-		f.setSize(800, 600);
-		f.setTitle("ë²„ìŠ¤ ì˜ˆì•½ ì‹œìŠ¤í…œ");
-		f.getContentPane().setLayout(null);
+	JLabel l2 = new JLabel();
+	l2.setBounds(60, 56, 654, 391);
+	
+	
+	ImageIcon img = new ImageIcon("bus.png");
 
-		JLabel l1 = new JLabel("ë²„ìŠ¤ ì˜ˆì•½ ì‹œìŠ¤í…œì…ë‹ˆë‹¤.");
-		l1.setForeground(Color.BLUE);
-		l1.setFont(new Font("êµ´ë¦¼", Font.BOLD, 23));
-		l1.setHorizontalAlignment(SwingConstants.CENTER);
-		l1.setBounds(113, 0, 565, 62);
-		f.getContentPane().add(l1);
+	l2.setIcon(img);
+	
+	f.getContentPane().add(l2);
 
-		JLabel l2 = new JLabel();
-		l2.setBounds(60, 56, 654, 391);
-		
-		
-		ImageIcon img = new ImageIcon("bus.png");
+	JButton btnNewButton = new JButton("¹ö½º¿¹¸Å");
 
-		l2.setIcon(img);
-		
-		f.getContentPane().add(l2);
+	btnNewButton.setBounds(12, 471, 233, 62);
+	f.getContentPane().add(btnNewButton);
 
-		JButton btnNewButton = new JButton("ë²„ìŠ¤ì˜ˆë§¤");
+	JButton btnNewButton_1 = new JButton("¿¹¸ÅÈ®ÀÎ");
+	btnNewButton_1.setBounds(265, 471, 233, 62);
+	f.getContentPane().add(btnNewButton_1);
 
-		btnNewButton.setBounds(12, 471, 233, 62);
-		f.getContentPane().add(btnNewButton);
+	JButton btnNewButton_2 = new JButton("ÇÁ·Î±×·¥ Á¾·á");
+	btnNewButton_2.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0); //¸ğµçÃ¢ ´İ±â
+		}
+	});
+	btnNewButton_2.setBounds(515, 471, 233, 62);
+	f.getContentPane().add(btnNewButton_2);
 
-		JButton btnNewButton_1 = new JButton("ì˜ˆë§¤í™•ì¸");
-		btnNewButton_1.setBounds(265, 471, 233, 62);
-		f.getContentPane().add(btnNewButton_1);
-
-		JButton btnNewButton_2 = new JButton("í”„ë¡œê·¸ë¨ ì¢…ë£Œ");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0); //ëª¨ë“ ì°½ ë‹«ê¸°
-			}
-		});
-		btnNewButton_2.setBounds(515, 471, 233, 62);
-		f.getContentPane().add(btnNewButton_2);
-
-		f.setVisible(true);
-	}
+	f.setVisible(true);
+	
+}
 
 }

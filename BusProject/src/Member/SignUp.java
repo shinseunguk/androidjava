@@ -1,136 +1,160 @@
 package Member;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class SignUp {
-	private static JTextField textField;
-	private static JTextField textField_1;
-	private static JTextField textField_2;
-	private static JTextField textField_3;
-	private static JTextField textField_4;
-	private static JTextField textField_5;
-	private static JTextField textField_6;
+import DB.DBÃ³¸®Àü´ã;
 
-	public static void main(String[] args) {
-		
-		
-			
-		
+@SuppressWarnings("serial")
+class SignUp extends JFrame {
+	// ¹öÆ°ÀÌ ´­·¯Áö¸é ¸¸µé¾îÁö´Â »õ Ã¢À» Á¤ÀÇÇÑ Å¬·¡½º
+	public SignUp() {
 		JFrame f = new JFrame();
 		f.setSize(500, 500);
 		f.getContentPane().setLayout(null);
-		f.setTitle("ë²„ìŠ¤ ì˜ˆì•½ ì‹œìŠ¤í…œ");
-		
-		JLabel l1 = new JLabel("ì•„ì´ë”” :");
-		l1.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
+		f.setTitle("¹ö½º ¿¹¾à ½Ã½ºÅÛ");
+		f.setLocation(200, 200);
+
+		JLabel l1 = new JLabel("¾ÆÀÌµğ :");
+		l1.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		l1.setBounds(12, 69, 103, 25);
 		l1.setHorizontalAlignment(SwingConstants.LEFT);
 		f.getContentPane().add(l1);
-		
-		JLabel l1_1 = new JLabel("íšŒì›ê°€ì…");
-		l1_1.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
+
+		JLabel l1_1 = new JLabel("È¸¿ø°¡ÀÔ");
+		l1_1.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		l1_1.setBounds(167, 10, 134, 25);
 		l1_1.setHorizontalAlignment(JLabel.CENTER);
 		f.getContentPane().add(l1_1);
-		
-		JLabel l1_2 = new JLabel("ë¹„ë°€ë²ˆí˜¸ :");
+
+		JLabel l1_2 = new JLabel("ºñ¹Ğ¹øÈ£ :");
 		l1_2.setHorizontalAlignment(SwingConstants.LEFT);
-		l1_2.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
+		l1_2.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		l1_2.setBounds(12, 114, 133, 25);
 		f.getContentPane().add(l1_2);
-		
-		JLabel l1_2_1 = new JLabel("ë¹„ë°€ë²ˆí˜¸í™•ì¸ :");
+
+		JLabel l1_2_1 = new JLabel("ºñ¹Ğ¹øÈ£È®ÀÎ :");
 		l1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-		l1_2_1.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
+		l1_2_1.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		l1_2_1.setBounds(12, 162, 174, 25);
 		f.getContentPane().add(l1_2_1);
-		
-		JLabel l1_2_1_1 = new JLabel("ì´ë¦„ :");
+
+		JLabel l1_2_1_1 = new JLabel("ÀÌ¸§ :");
 		l1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		l1_2_1_1.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
+		l1_2_1_1.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		l1_2_1_1.setBounds(12, 208, 87, 25);
 		f.getContentPane().add(l1_2_1_1);
-		
-		JLabel l1_2_1_2 = new JLabel("ìƒë…„ì›”ì¼(6ìë¦¬) :");
+
+		JLabel l1_2_1_2 = new JLabel("»ı³â¿ùÀÏ(6ÀÚ¸®) :");
 		l1_2_1_2.setHorizontalAlignment(SwingConstants.LEFT);
-		l1_2_1_2.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
+		l1_2_1_2.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		l1_2_1_2.setBounds(12, 255, 174, 25);
 		f.getContentPane().add(l1_2_1_2);
-		
-		JLabel l1_2_2 = new JLabel("ì „í™”ë²ˆí˜¸ :");
+
+		JLabel l1_2_2 = new JLabel("ÀüÈ­¹øÈ£ :");
 		l1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
-		l1_2_2.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
+		l1_2_2.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		l1_2_2.setBounds(12, 301, 133, 25);
 		f.getContentPane().add(l1_2_2);
-		
-		JLabel l1_2_1_3 = new JLabel("ì´ë©”ì¼ ì£¼ì†Œ  :");
+
+		JLabel l1_2_1_3 = new JLabel("ÀÌ¸ŞÀÏ ÁÖ¼Ò  :");
 		l1_2_1_3.setHorizontalAlignment(SwingConstants.LEFT);
-		l1_2_1_3.setFont(new Font("êµ´ë¦¼", Font.BOLD, 20));
+		l1_2_1_3.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		l1_2_1_3.setBounds(12, 348, 174, 25);
 		f.getContentPane().add(l1_2_1_3);
-		
-		textField = new JTextField();
+
+		JTextField textField = new JTextField();
 		textField.setBounds(191, 67, 199, 25);
 		f.getContentPane().add(textField);
 		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(191, 114, 199, 25);
-		f.getContentPane().add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(191, 162, 199, 25);
-		f.getContentPane().add(textField_2);
-		
-		textField_3 = new JTextField();
+
+		JPasswordField passwordField_1 = new JPasswordField();
+		passwordField_1.setColumns(10);
+		passwordField_1.setBounds(191, 114, 199, 25);
+		f.getContentPane().add(passwordField_1);
+
+		JPasswordField passwordField_2 = new JPasswordField();
+		passwordField_2.setColumns(10);
+		passwordField_2.setBounds(191, 162, 199, 25);
+		f.getContentPane().add(passwordField_2);
+
+		JTextField textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(191, 208, 199, 25);
 		f.getContentPane().add(textField_3);
-		
-		textField_4 = new JTextField();
+
+		JTextField textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(191, 255, 199, 25);
 		f.getContentPane().add(textField_4);
-		
-		textField_5 = new JTextField();
+
+		JTextField textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		textField_5.setBounds(191, 301, 199, 25);
 		f.getContentPane().add(textField_5);
-		
-		textField_6 = new JTextField();
+
+		JTextField textField_6 = new JTextField();
 		textField_6.setColumns(10);
 		textField_6.setBounds(191, 348, 199, 25);
 		f.getContentPane().add(textField_6);
-		
-		JButton btnNewButton = new JButton("ë¡œê·¸ì¸ í™”ë©´ìœ¼ë¡œ");
+
+		JButton btnNewButton = new JButton("·Î±×ÀÎ È­¸éÀ¸·Î");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				f.dispose();
 			}
 		});
 		btnNewButton.setBounds(68, 406, 134, 34);
 		f.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("íšŒì›ê°€ì…");
+
+		JButton btnNewButton_1 = new JButton("È¸¿ø°¡ÀÔ");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String user_id = textField.getText();
+				String user_pw = new String(passwordField_1.getText());
+				String user_pwchk = new String(passwordField_2.getText());
+				String user_name = textField_3.getText();
+				int user_birth = Integer.parseInt(textField_4.getText());
+				String user_pnumber = textField_5.getText();
+				String user_email	= textField_6.getText();
+
+				if (user_id.isEmpty() || user_pw.isEmpty() || user_pwchk.isEmpty() || user_name.isEmpty() || user_pnumber.isEmpty() || user_email.isEmpty()) {
+					JOptionPane.showMessageDialog(f, "È¸¿øÁ¤º¸¸¦ ºüÁü¾øÀÌ ÀÔ·ÂÇÏ¼¼¿ä.");
+				}
+				
+				else if(!(user_pw.equals(user_pwchk))) { // È®ÀÎÇÊ¿ä
+					JOptionPane.showMessageDialog(f, "ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ µ¿ÀÏÇÏÁö ¾Ê½À´Ï´Ù.");
+				}
+				
+				else {
+					DBÃ³¸®Àü´ã db = new DBÃ³¸®Àü´ã();
+					try {
+						db.create(user_id, user_pw, user_name,user_birth,user_pnumber,user_email);
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(f, "È¸¿ø°¡ÀÔ ¿Ï·á."); // ¾È³ª¿È.
+					
+					f.dispose();
+				}
+
+			}
+		});
 		btnNewButton_1.setBounds(256, 406, 134, 34);
 		f.getContentPane().add(btnNewButton_1);
-		
-		
-		
-		
-		
-		
+
 		f.setVisible(true);
-		
 	}
 }
