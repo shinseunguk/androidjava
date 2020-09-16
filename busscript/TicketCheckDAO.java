@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class TicketCheckDAO {
-	static public ArrayList<TicketCheckVO> getReservationList() throws Exception {
+	static public ArrayList<TicketCheckVO> getReservationList(String userID) throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3366/bus";
 		String user = "root";
@@ -15,8 +15,9 @@ public class TicketCheckDAO {
 		
 		Connection con = DriverManager.getConnection(url, user, password);
 		
-		String query = "select * from ticket";
+		String query = "select * from ticket where user_id = ?";
 		PreparedStatement ps = con.prepareStatement(query);
+		ps.setString(1, userID);
 		ResultSet rs = ps.executeQuery();
 		
 		ArrayList<TicketCheckVO> list = new ArrayList<TicketCheckVO>();
@@ -36,4 +37,6 @@ public class TicketCheckDAO {
 		
 		return list;
 	}
+	
+
 }

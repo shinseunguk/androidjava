@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,7 +21,9 @@ import javax.swing.SwingConstants;
 
 import DB.PaymentDB;
 import busdeviation.DeviationSelect;
+import 예매확인.Reservation_Info_DAO;
 import 예매확인.Reservation_Info_UI;
+import 예매확인.Reservation_Info_VO;
 
 public class Payment {
 	private static JTextField textField;
@@ -33,7 +36,7 @@ public class Payment {
 	private static JPasswordField passwordField_2;
 	static String cardN = null;
 
-	public Payment() {
+	public Payment(String userID, Reservation_Info_VO bag) {
 		JFrame f = new JFrame();
 		f.setSize(800, 600);
 		f.getContentPane().setLayout(null);
@@ -98,7 +101,9 @@ public class Payment {
 		l1_1_2.setFont(new Font("굴림", Font.BOLD, 20));
 		l1_1_2.setBounds(546, 184, 47, 33);
 		f.getContentPane().add(l1_1_2);
-
+		
+		int a = bag.getSeat_num();
+		System.out.println(a);
 		JLabel l1_2 = new JLabel("카드 번호");
 		l1_2.setHorizontalAlignment(SwingConstants.CENTER);
 		l1_2.setFont(new Font("굴림", Font.BOLD, 14));
@@ -185,6 +190,8 @@ public class Payment {
 
 						PaymentDB pay = new PaymentDB(card_company, card_number, valid_month, valid_years, card_pw,
 								card_user_birth);
+						
+						
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -196,7 +203,11 @@ public class Payment {
 					}
 					f.dispose();
 					try {
-						Reservation_Info_UI riu = new Reservation_Info_UI ();
+						bag.setCard_num(card_number);
+						bag.setPay_date(new Date());
+						Reservation_Info_DAO dao = new Reservation_Info_DAO();
+						dao.create(userID, bag);
+						Reservation_Info_UI riu = new Reservation_Info_UI (userID, bag);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -212,7 +223,7 @@ public class Payment {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				f.dispose();
-				DeviationSelect ds = new DeviationSelect();
+				DeviationSelect ds = new DeviationSelect(userID, bag);
 				
 			}
 		});

@@ -15,7 +15,7 @@ import busscript.Location;
 import busscript.TicketCheck;
 
 public class Main extends JFrame {
-	public Main() {
+	public Main(String userID) {
 	
 	JFrame f = new JFrame();
 	f.getContentPane().setBackground(Color.WHITE);
@@ -45,7 +45,7 @@ public class Main extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				f.dispose();
-				Location lo = new Location(new JFrame());
+				Location lo = new Location(userID);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -63,7 +63,7 @@ public class Main extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			f.dispose();
 			try {
-				TicketCheck tc = new TicketCheck();
+				TicketCheck tc = new TicketCheck(userID);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

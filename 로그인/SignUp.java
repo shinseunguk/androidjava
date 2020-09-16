@@ -135,8 +135,8 @@ class SignUp extends JFrame {
 				String user_email	= textField_6.getText();
 			
 					
-				if (user_id.isEmpty() || user_pw.isEmpty() || user_pwchk.isEmpty() || user_name.isEmpty() || user_pnumber.isEmpty() || user_email.isEmpty()||
-						user_birtha.isEmpty()) {
+				if (user_id.isEmpty() || user_pw.isEmpty() || user_pwchk.isEmpty() || user_name.isEmpty() || user_pnumber.isEmpty() 
+						|| user_email.isEmpty()|| user_birtha.isEmpty()) {
 					JOptionPane.showMessageDialog(f, "회원정보를 빠짐없이 입력하세요.");
 				}
 				
@@ -156,6 +156,7 @@ class SignUp extends JFrame {
 					JOptionPane.showMessageDialog(f, "회원가입 완료."); // 안나옴.
 					
 					f.dispose();
+					Main main = new Main(user_id);
 				}
 
 			}

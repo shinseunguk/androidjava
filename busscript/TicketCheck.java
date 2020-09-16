@@ -15,14 +15,16 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import 로그인.Main;
+import 예매확인.Reservation_Info_DAO;
 import 예매확인.Reservation_Info_UI;
+import 예매확인.Reservation_Info_VO;
 
 public class TicketCheck {
 	private static JTable table;
 	private static JScrollPane scrollpane;
 	
 	@SuppressWarnings("serial")
-	public TicketCheck() throws Exception {
+	public TicketCheck(String userID) throws Exception {
 		JFrame f = new JFrame();
 		f.getContentPane().setBackground(Color.WHITE);
 		
@@ -31,7 +33,7 @@ public class TicketCheck {
 		
 		//테이블 그리기
 		String[] header = {"출발일", "출발지", "도착지", "좌석", "금액"};
-		ArrayList<TicketCheckVO> list = TicketCheckDAO.getReservationList();
+		ArrayList<Reservation_Info_VO> list = Reservation_Info_DAO.getReservationList(userID);
 		String[][] contents = new String[list.size()][5];
 		for(int i=0; i<list.size(); i++) {
 			Date ddate = list.get(i).getDeparture_date();
@@ -47,6 +49,7 @@ public class TicketCheck {
 			@Override
 		    public boolean isCellEditable(int row, int column) {
 		       return false;
+		       
 		    }
 		});
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
@@ -64,7 +67,7 @@ public class TicketCheck {
 			public void actionPerformed(ActionEvent e) {
 				//닫는 부분 구현
 				f.dispose();
-				Main main = new Main();
+				Main main = new Main(userID);
 			}
 		});
 		btnCancel.setBounds(118, 482, 169, 48);
@@ -75,7 +78,9 @@ public class TicketCheck {
 			public void actionPerformed(ActionEvent e) {
 				f.dispose();
 				try {
-					Reservation_Info_UI ui = new Reservation_Info_UI();
+					Reservation_Info_DAO dao = new Reservation_Info_DAO();
+					Reservation_Info_VO bag = dao.getReservationOne(list.get(table.getSelectedRow()).getTicket_id());
+					Reservation_Info_UI ui = new Reservation_Info_UI(userID, bag);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

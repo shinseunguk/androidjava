@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,7 +23,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import busscript.Location;
-import 로그인.Payment;
+import 예매확인.Reservation_Info_VO;
+import 좌석선택.Seat_Reservation;
 
 public class DeviationSelect {
 	private static JTable table;
@@ -43,11 +46,11 @@ public class DeviationSelect {
 	
 	static HashMap<String, ContentsWrapper> dateHash = new HashMap<String, ContentsWrapper> ();
 	
-	public DeviationSelect() {
+	public DeviationSelect(String userID, Reservation_Info_VO bag) {
 		JFrame f = new JFrame();
 		f.getContentPane().setBackground(Color.WHITE);
 		Random r = new Random();
-		String[] buscompanyname = {"경성여객", "보영운수", "용림교통", "태릉교통", "흥안운수"};
+		String[] buscompanyname = {"Kyeongseong", "Boyeong", "Yongnim", "Taereung", "Heungan"};
 		
 		f.setSize(800,600);
 		f.getContentPane().setLayout(null);
@@ -62,7 +65,8 @@ public class DeviationSelect {
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
 		textField.setBounds(312, 25, 227, 38);
-		textField.setText("2020-09-15"); //다른 JFrame에서 날짜 텍스트 받아와서 출력해주세요
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		textField.setText(df.format(bag.getDeparture_date()));
 		f.getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -78,6 +82,7 @@ public class DeviationSelect {
 			Collections.sort(timeList);
 			for (int i = 0; i < contents.length; i++) {
 				contents[i][0] = timeList.get(i) + ":00";
+				if(timeList.get(i) < 10) contents[i][0] = "0" + contents[i][0];
 				contents[i][1] = buscompanyname[r.nextInt(5)];
 			}
 			
@@ -110,7 +115,7 @@ public class DeviationSelect {
 				//그냥 화면 닫기
 				f.dispose();
 				try {
-					Location lo = new Location(new JFrame());
+					Location lo = new Location(userID);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -126,7 +131,12 @@ public class DeviationSelect {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				f.dispose();
-				Payment pm = new Payment();
+				int idx = table.getSelectedRow();
+				bag.getDeparture_date().setHours(Integer.parseInt( contents[idx][0].substring(0,2) ));
+				bag.getDeparture_date().setMinutes(0);
+				bag.setBus_info(contents[idx][1]);
+				bag.setPlatform_info(String.valueOf(r.nextInt(15)+1));
+				Seat_Reservation sr = new Seat_Reservation(userID, bag);
 				//contents[table.getSelectedRow()][0], contents[table.getSelectedRow()][1] 넘겨주기
 			}
 		});

@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -17,7 +19,9 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import busdeviation.DeviationSelect;
 import 로그인.Payment;
+import 예매확인.Reservation_Info_VO;
 
 
 
@@ -28,8 +32,14 @@ public class Seat_Frame {
 	public int seat_num = 0;
 	public String dd = "";
 	public int seat_price = 21500;
+	public int seat_pay;
+	Reservation_Info_VO bag;
 	
-	public void mainFrame() {
+	public Seat_Frame(Reservation_Info_VO bag) {
+		this.bag = bag;
+	}
+
+	public void mainFrame(String userID) {
 		//main frame
 		JFrame f = new JFrame();
 		f.getContentPane().setBackground(Color.WHITE);
@@ -47,6 +57,19 @@ public class Seat_Frame {
 		p3.setBounds(548, 10, 224, 541);
 		
 		//선택완료 버튼 생성
+		JButton back = new JButton();
+		back.setForeground(new Color(255, 255, 255));
+		back.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		back.setBackground(new Color(102, 0, 255));
+		back.setBounds(560, 410, 200, 53);
+		back.setText("뒤로가기");
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					DeviationSelect ds = new DeviationSelect(userID, bag);
+					}
+			});
+		f.add(back);
+		
 		JButton confirm = new JButton();
 		confirm.setForeground(new Color(255, 255, 255));
 		confirm.setFont(new Font("맑은 고딕", Font.BOLD, 30));
@@ -58,10 +81,11 @@ public class Seat_Frame {
 				if (e.getSource() == confirm) {
 					if(num!=0) {
 						seat_num = num;
-						System.out.println(seat_num);
-					f.dispose();
-					Payment pm = new Payment();
-						
+						bag.setSeat_num(seat_num);
+						bag.setPrice(21500);
+						bag.setUser_id(userID);
+						f.dispose();
+						Payment pm = new Payment(userID, bag);
 					}else {
 						JOptionPane.showMessageDialog(f, "좌석을 선택해주세요.");
 					
@@ -107,43 +131,31 @@ public class Seat_Frame {
 		
 		
 		//라벨 및 기타 텍스트 필드 생성 및 설정
-		JLabel l_p1_date = new JLabel("출발 : 동서울");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		JLabel l_p1_date = new JLabel("출발일시 : " + df.format(bag.getDeparture_date()));
 		l_p1_date.setForeground(Color.WHITE);
-		l_p1_date.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		l_p1_date.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		l_p1_date.setBounds(12, 10, 162, 37);
 		p1.add(l_p1_date);
 		
-		JLabel l_p1_start = new JLabel("출발 : 동서울");
+		JLabel l_p1_start = new JLabel("출발 : " + bag.getDeparture_point());
 		l_p1_start.setForeground(Color.WHITE);
 		l_p1_start.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		l_p1_start.setBounds(12, 57, 162, 37);
 		p1.add(l_p1_start);
-		JLabel l_p1_arrive = new JLabel("도착 : 부산");
+		JLabel l_p1_arrive = new JLabel("도착 : " + bag.getDestination());
 		l_p1_arrive.setForeground(Color.WHITE);
 		l_p1_arrive.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		l_p1_arrive.setBounds(12, 104, 162, 37);
 		p1.add(l_p1_arrive);
-		JLabel l_p1_distance = new JLabel("386.6km");
-		l_p1_distance.setForeground(Color.WHITE);
-		l_p1_distance.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		l_p1_distance.setBounds(12, 138, 68, 37);
-		p1.add(l_p1_distance);
-		JLabel l_p1_s_time = new JLabel("출발 시간 : ");
+		df = new SimpleDateFormat("hh");
+		JLabel l_p1_s_time = new JLabel("출발 시간 : " + df.format(bag.getDeparture_date()) + ":00");
 		l_p1_s_time.setForeground(Color.WHITE);
 		l_p1_s_time.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		l_p1_s_time.setBounds(12, 213, 200, 27);
 		p1.add(l_p1_s_time);
-		JLabel l_p1_wtime = new JLabel("소요시간 : 4시간 15분 소요");
-		l_p1_wtime.setForeground(Color.WHITE);
-		l_p1_wtime.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		l_p1_wtime.setBounds(12, 163, 200, 37);
-		p1.add(l_p1_wtime);
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 198, 212, 2);
-		JLabel l_p1_atime = new JLabel("도착 시간 : ");
-		l_p1_atime.setForeground(Color.WHITE);
-		l_p1_atime.setFont(new Font("맑은 고딕", Font.BOLD, 12));
-		l_p1_atime.setBounds(12, 246, 200, 27);
 		JLabel lblNewLabel = new JLabel("선택좌석");
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		lblNewLabel.setBounds(12, 10, 200, 37);
@@ -192,6 +204,8 @@ public class Seat_Frame {
 								num = dd.charAt(9) - '0';
 								seat[j].setIcon(img_c[j]);
 								lblNewLabel_1.setText((j + 1) + "번");
+								Reservation_Info_VO bag = new Reservation_Info_VO();
+								bag.setSeat_num(j+1);
 								lblNewLabel_2_1.setText("21,500 원");
 								lblNewLabel_2_2_1.setText("21,500 원");
 								same++;
@@ -237,7 +251,6 @@ public class Seat_Frame {
 
 		
 		p1.add(separator);
-		p1.add(l_p1_atime);
 		f.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		f.getContentPane().add(p2);
 		f.getContentPane().add(p3);

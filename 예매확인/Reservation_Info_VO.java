@@ -1,5 +1,7 @@
 package 예매확인;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reservation_Info_VO {
@@ -40,6 +42,10 @@ public class Reservation_Info_VO {
 	}
 	public Date getDeparture_date() {
 		return departure_date;
+	}
+	public String getDeparture_date_string() {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		return df.format(departure_date);
 	}
 	public void setDeparture_date(Date departure_date) {
 		this.departure_date = departure_date;

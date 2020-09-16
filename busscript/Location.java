@@ -15,8 +15,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,6 +33,7 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import 로그인.Main;
+import 예매확인.Reservation_Info_VO;
 
 //ArrayList에 대응하기 위해 확장된 Listener
 abstract class IndexedListener implements ActionListener {
@@ -58,18 +61,18 @@ public class Location {
 	static ArrayList<String> jeonbukArray = new ArrayList<String>();
 	static ArrayList<String> busanArray = new ArrayList<String>();
 	static ArrayList<String> daeguArray = new ArrayList<String>();
-	static int tfPointer = 0;	//JTextField를 가리키는 포인터 (0이면 tfOrigin, 1이면 tfDest)
+	static int tfPointer;	//JTextField를 가리키는 포인터 (0이면 tfOrigin, 1이면 tfDest)
 	
 	JFrame f;
 	JFrame jfParent;
 	private SpringLayout springLayout;
 	
-	public Location (JFrame parentFrame) throws Exception {
+	public Location (String userID) throws Exception {
 		f = new JFrame();
 		f.getContentPane().setBackground(Color.WHITE);
 		f.setSize(800, 600);
 		f.getContentPane().setLayout(null);
-		jfParent = parentFrame;
+		tfPointer = 0;
 		
 		//Location ArrayList를 DB에서 불러와 초기화
 		if(allArray.size() == 0) setTerminalArray();
@@ -90,6 +93,7 @@ public class Location {
 				tfDest.setBackground(Color.LIGHT_GRAY);
 			};
 		});
+		String origin = tfOrigin.getText();
 		
 		tfDest = new JTextField();
 		tfDest.setEditable(false);
@@ -106,6 +110,7 @@ public class Location {
 				tfDest.setBackground(Color.WHITE);
 			};
 		});
+		String dest = tfDest.getText();
 		
 		//주요터미널 출력
 		JPanel panel1 = new JPanel();
@@ -235,6 +240,8 @@ public class Location {
 		datePicker.getJFormattedTextField().setFont(new Font("맑은 고딕", Font.PLAIN, 24));
 		datePicker.setBounds(318,475,284,25);
 		f.getContentPane().add(datePicker);
+		Date date = model.getValue();
+		// 변수 가져오기
 		
 		//부제목들
 		JLabel lblOrigin = new JLabel("\uCD9C\uBC1C\uC9C0");
@@ -289,9 +296,12 @@ public class Location {
 					return;
 				}else {
 				f.dispose();
-				DeviationSelect ds = new DeviationSelect();
+				Reservation_Info_VO bag = new Reservation_Info_VO();
+				bag.setDeparture_point(tfOrigin.getText());
+				bag.setDestination(tfDest.getText());
+				bag.setDeparture_date(model.getValue());
 				
-					
+				DeviationSelect ds = new DeviationSelect(userID, bag);
 				}
 				//parentPanel.setVisible(true);
 				//panel1.setVisible(false);
@@ -308,7 +318,7 @@ public class Location {
 			public void actionPerformed(ActionEvent e) {
 				//panel1.setVisible(false);
 				f.dispose();
-				Main main = new Main();
+				Main main = new Main(userID);
 			}
 		});
 		btnCancel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -395,10 +405,4 @@ public class Location {
 		btnLocation.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		return btnLocation;
 	}
-	
-	//parent frame 받아오는 메서드
-	public JFrame getParentFrame() {
-		return jfParent;
-	} 
-	
 }

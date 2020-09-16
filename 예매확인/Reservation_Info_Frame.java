@@ -34,13 +34,10 @@ public class Reservation_Info_Frame {
 		return image;
 	}
 
-	public void info_frame() throws Exception {
+	public void info_frame(String userID, Reservation_Info_VO bag) throws Exception {
 
 		JFrame f = new JFrame();
-		f.getContentPane().setBackground(Color.WHITE);
-		Reservation_Info_DAO r = new Reservation_Info_DAO();
-		Reservation_Info_VO bag = r.read(1);
-		
+		f.getContentPane().setBackground(Color.WHITE);	
 		
 		JLabel label_m_1 = new JLabel();
 		label_m_1.setForeground(new Color(144, 197, 221));
@@ -74,12 +71,12 @@ public class Reservation_Info_Frame {
 		label_1_m2_rnum.setBounds(569, 1, 57, 35);
 		label_1_m2_rnum.setForeground(Color.GRAY);
 		label_1_m2_rnum.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		label_1_m2_rnum.setText("예매번호");
+//		label_1_m2_rnum.setText("예매번호");
 		JLabel label_1_m2_rnum_i = new JLabel();
 		label_1_m2_rnum_i.setBounds(638, 0, 122, 36);
 		label_1_m2_rnum_i.setForeground(Color.DARK_GRAY);
 		label_1_m2_rnum_i.setFont(new Font("맑은 고딕", Font.BOLD, 12));
-		label_1_m2_rnum_i.setText(bag.getTicket_id()+"");
+//		label_1_m2_rnum_i.setText(bag.getTicket_id()+"");
 
 		// =========================================panel 1-1
 		ImagePanel imgpn1 = new ImagePanel("./images/Start-arrive.png");
@@ -142,7 +139,7 @@ public class Reservation_Info_Frame {
 		label_1_2_seatnum.setBounds(12, 152, 44, 30);
 		JLabel label_1_2_seatnum_i = new JLabel();
 		label_1_2_seatnum_i.setFont(new Font("맑은 고딕", Font.BOLD, 12));
-		label_1_2_seatnum_i.setText(bag.getSeat_num()+"");
+		label_1_2_seatnum_i.setText(bag.getSeat_num()+"번");
 		label_1_2_seatnum_i.setBounds(68, 152, 100, 30);
 
 		// =========================================panel 2
@@ -189,7 +186,7 @@ public class Reservation_Info_Frame {
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				f.dispose();
-				Main main = new Main();
+				Main main = new Main(userID);
 			}
 		});
 		JButton confirm = new JButton();
