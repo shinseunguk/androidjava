@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 3 < 2 < 1  -->
+<context:property-placeholder location="classpath:db.properties"/>
+<!--1. dbcp  -->
+<!--DBCP dbcp = new DBCP 객체 이름이 bean 아이디로들어감 -->
+<bean id="dbcp" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName" value="${jdbc.driver}"></property><!--set 메서드 부르는 역할  -->
+	<property name="url" value="${jdbc.url}"></property><!--set 메서드 부르는 역할  -->
+	<property name="username" value="${jdbc.id}"></property><!--set 메서드 부르는 역할  -->
+	<property name="password" value="${jdbc.pw}"></property><!--set 메서드 부르는 역할  -->
+</bean>
+<!--2.mybatis 설정과 관련된 객체  -->
+<bean id="mybatis" class="org.mybatis.spring.SqlSessionTemplate">
+<!-- 파라메터있는 생성자 호출시
+생성자 파라메터 순서대로 써준다.  -->
+    <constructor-arg ref="config"></constructor-arg>
+</bean>
+<!--3.mybatis 원래 객체  -->
+<bean id="config" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+    <property name="dataSource" ref="dbcp"></property>
+</bean>
+
+</beans>
