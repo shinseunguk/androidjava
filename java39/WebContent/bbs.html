@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판 글쓰기</title>
+
+<style>
+div {
+	width: 800px;
+	height: 800px;
+	margin: 0 auto;
+}
+
+#ti {
+	width: 400px;
+}
+
+#co {
+	width: 400px;
+	height: 400px;
+}
+</style>
+</head>
+<body>
+	<div>
+
+		<h3>게시판 글쓰기</h3>
+		<form action="insert3.jsp">
+			번호: <input type="text" name="no"><br> 제목: <input
+				type="text" name="title" id="ti"><br> 내용: <input
+				type="text" name="content" id="co"><br> 글쓴이: <input
+				type="text" name="writer"><br>
+			<button type="submit">게시글 올리기</button>
+		</form>
+	</div>
+</body>
+</html>
