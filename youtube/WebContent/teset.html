@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #282828;
+        }
+
+        .wrap {
+            margin: 0 auto;
+            width: 1200px;
+        }
+
+        .tabs {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .tab {
+            width: calc(100%/4);
+            height: 70px;
+            float: left;
+            text-align: center;
+            line-height: 70px;
+            border: 1px solid #d8d8d8;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+
+        .content {
+            width: 1138px;
+            padding: 30px;
+            border: 1px solid #d8d8d8;
+            border-top: none;
+
+        }
+
+        .agreeContent {
+            width: 98%;
+            margin: 0 auto;
+            border: 1px solid #1f1111;
+            margin-top: 5px;
+        }
+
+        .title {
+            color: #1f4787;
+            font-size: 30px;
+        }
+
+        .agreeContent li {
+            color: #707070;
+        }
+
+        .agreebox {
+            margin-bottom: 15px;
+        }
+
+        .nextBtn {
+            width: 180px;
+            height: 50px;
+            background-color: #1f4787;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .btnBox {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        .fcBlue {
+            color: #1f4787;
+        }
+
+        .inputTbl {
+            width: 98%;
+            border-top: 1px solid #1f4787;
+            border-bottom: 1px solid #b3b3b3;
+            border-spacing: 0;
+        }
+
+        .inputTbl>tbody>tr>td {
+            border-top: 1px solid #ebebeb;
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+        .inputTbl>tbody>tr>td:first-child {
+            width: 25%;
+            background-color: #FBFCFD;
+            border-right: 1px solid #ebebeb;
+            text-indent: 50px;
+        }
+
+        .input {
+            margin: 0;
+            padding: 0;
+            height: 35px;
+            border: 1px solid #d8d8d8;
+            outline: none;
+            font-size: 20px;
+        }
+
+        .input:focus {
+            border: 1px solid #0e77d9;
+        }
+
+        .long {
+            width: 400px;
+        }
+
+        #idChk {
+            line-height: 42px;
+        }
+
+        input+span {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        #emailSelect {
+            height: 35px;
+            border: none;
+            outline: none;
+            border: 1px solid #d8d8d8;
+            font-size: 20px;
+        }
+
+        input[type=radio] {
+            display: none;
+        }
+
+        input[name=gender]+label {
+            display: inline-block;
+            height: 37px;
+            line-height: 37px;
+            width: 130px;
+            text-align: center;
+            border: 1px solid #1f4787;
+            color: #1f4787;
+        }
+
+        input[name=gender]:checked+label {
+            background-color: #1f4787;
+            color: #fff;
+
+        }
+
+        #introduce {
+            resize: none;
+            width: 600px;
+            height: 300px;
+            border: 1px solid #d8d8d8;
+            outline: none;
+            font-size: 20px;
+        }
+
+        #introduce:focus {
+            border: 1px solid #1f4787;
+        }
+
+        #loginFrm {
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 100px;
+            display: none;
+        }
+
+        .inputDiv {
+            margin-bottom: 35px;
+        }
+
+        .loginTitle {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #loginFrm input {
+            width: 100%;
+        }
+
+        .btnBox>input {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>단계가 있는 회원가입</h1>
+    <p>최초에 전역변수에 배열을 선언하고 중복체크용 아이디 5개 push하고 시작</p>
+    <hr>
+    <br><br>
+    <div class="wrap">
+        <ul class="tabs">
+            <li class="tab">약관확인</li>
+            <li class="tab">필수정보입력</li>
+            <li class="tab">상세정보입력</li>
+            <li class="tab">가입완료</li>
+        </ul>
+        <div class="content">
+            <div class="contentDetail">
+                <h3 class="title">이용약관 확인 및 동의</h3>
+                <input type="checkbox" id="allAgreement" onclick="allCheck(this);">
+                <label for="allAgreement">이용약관 전체체크</label>
+                <br><br>
+                <div class='agreebox'>
+                    <input type="checkbox" id="privacyAgreement" class="agreeCheck">
+                    <label for="privacyAgreement">개인정보 수집 및 이용에 동의 <span class="fcBlue">(필수)</span></label>
+                    <div class="agreeContent">
+                        <ul>
+                            <li>수집항목 : 이름, 휴대전화번호, 생년월일, 비밀번호</li>
+                            <li>수집·이용목적 : 회원제 서비스 제공</li>
+                            <li>보유 및 이용기간 : 회원탈퇴 시 까지</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class='agreebox'>
+                    <input type="checkbox" id="optionalAgreement" class="agreeCheck">
+                    <label for="optionalAgreement">개인정보 수집 및 이용에 동의 <span class="fcBlue">(선택)</span></label>
+                    <div class="agreeContent">
+                        <ul>
+                            <li>수집항목 : 이름, 휴대전화번호, 생년월일, 비밀번호</li>
+                            <li>수집·이용목적 : 회원제 서비스 제공</li>
+                            <li>보유 및 이용기간 : 회원탈퇴 시 까지</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="btnBox">
+                    <button onclick="next1();" class="nextBtn">다음</button>
+                </div>
+
+            </div>
+            <div class="contentDetail">
+                <h3 class="title">필수정보입력</h3>
+                <table class="inputTbl">
+                    <tr>
+                        <td>아이디</td>
+                        <td><input type="text" class="input long" name="id" onkeyup="chkId(this);"> <span id="idChk"></span></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td><input type="password" class="input long" name="pw"></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호 확인</td>
+                        <td><input type="password" class="input long" name="pw_re" onfocusout="chkPw(this);"> <span id="pwChk"></span></td>
+                    </tr>
+                    <tr>
+                        <td>이름</td>
+                        <td><input type="text" class="input long" name="name"></td>
+                    </tr>
+                </table>
+                <div class="btnBox">
+                    <button onclick="next2();" class="nextBtn">다음</button>
+                </div>
+            </div>
+            <div class="contentDetail">
+                <h3 class="title">추가정보입력</h3>
+                <table class="inputTbl">
+                    <tr>
+                        <td>이메일</td>
+                        <td>
+                            <input type="text" class="input" name="email1">
+                            @
+                            <input type="text" class="input" name="email2">
+                            <select name="emailSelect" id="emailSelect" onchange="mailSelect(this);">
+                                <option value="">직접입력</option>
+                                <option value="naver.com">naver.com</option>
+                                <option value="nate.com">nate.com</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="hanmail.net">hanmail.net</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>성별</td>
+                        <td>
+                            <input type="radio" name="gender" value="남" id="m"><label for="m">남자</label>
+                            <input type="radio" name="gender" value="여" id="f"><label for="f">여자</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>자기소개</td>
+                        <td><textarea id="introduce"></textarea></td>
+                    </tr>
+                </table>
+                <div class="btnBox">
+                    <button onclick="next3();" class="nextBtn">다음</button>
+                </div>
+            </div>
+            <div class="contentDetail">
+                <h3 class="title">가입을 축하합니다.</h3>
+
+                <button onclick="loginFrm();" class="nextBtn">로그인하기</button>
+                <form action="/login.html" action="post" id="loginFrm">
+                    <div class="inputDiv">
+                        <label class="loginTitle">아이디</label>
+                        <input type="text" name="loginId" class="input long">
+                    </div>
+                    <div class="inputDiv">
+                        <label class="loginTitle">비밀번호</label>
+                        <input type="password" name="loginPw" class="input long">
+                    </div>
+                    <div class="btnBox">
+                        <input type="submit" value="로그인" class="nextBtn">
+                        <input type="button" value="취소" onclick="loginCancel();" class="nextBtn">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        var tabs = document.getElementsByClassName('tab');
+        var idCheck = false;
+        var pwCheck = false;
+        var members = new Array();
+        members.push('user01');
+        members.push('user02');
+        members.push('user03');
+        members.push('user04');
+        members.push('user05');
+
+        function allCheck(obj) {
+            var chks = document.getElementsByClassName("agreeCheck");
+            if (obj.checked) {
+                for (var i = 0; i < chks.length; i++) {
+                    chks[i].checked = true;
+                }
+            } else {
+                for (var i = 0; i < chks.length; i++) {
+                    chks[i].checked = false;
+                }
+            }
+        }
+
+        function next1() {
+            var agree = document.getElementById('privacyAgreement');
+            if (agree.checked) {
+                selectTab(1);
+            } else {
+                alert("이용약관 동의를 체크해주세요");
+            }
+        }
+
+        function next2() {
+
+            if (idCheck && pwCheck && document.getElementsByName("name")[0].value != '') {
+                selectTab(2);
+            } else {
+                alert("입력 값을 확인해주세요!");
+            }
+        }
+
+        function next3() {
+            if (confirm("회원가입 하시겠습니까?")) {
+                selectTab(3);
+            }
+        }
+        window.onload = function() {
+            selectTab(0);
+        }
+
+        function selectTab(idx) {
+            var content = document.getElementsByClassName("contentDetail");
+            initTab();
+            tabs[idx].style.borderBottom = "none";
+            tabs[idx].style.color = "#1f4787";
+            tabs[idx].style.borderTop = "10px solid #1f4787";
+            tabs[idx].style.lineHeight = "50px";
+            tabs[idx].style.fontWeight = "900";
+            content[idx].style.display = "block";
+        }
+
+        function initTab() {
+            var content = document.getElementsByClassName("contentDetail");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.border = "1px solid #d8d8d8";
+                tabs[i].style.lineHeight = "70px";
+                tabs[i].style.color = "#282828";
+                tabs[i].style.fontWeight = "400";
+                content[i].style.display = "none";
+            }
+        }
+
+        function chkId(obj) {
+            var idChk = document.getElementById("idChk");
+            var inputId = obj.value;
+            for (var i = 0; i < members.length; i++) {
+                if (members[i] == inputId) {
+                    idChk.innerHTML = "이미 사용중인 아이디 입니다.";
+                    idChk.style.color = "red";
+                    obj.style.border = "1px solid red";
+                    idCheck = false;
+                    return;
+                }
+            }
+            idChk.innerHTML = "사용가능한 아이디 입니다.";
+            idChk.style.color = "#1f4787";
+            obj.style.border = "1px solid #1f4787";
+            idCheck = true;
+        }
+
+        function chkPw(obj) {
+            var pwChk = document.getElementById("pwChk");
+            var pw = document.getElementsByName("pw")[0].value;
+            var pwRe = obj.value;
+            if (pwRe == "") {
+                pwChk.innerHTML = "";
+                pwCheck = false;
+            } else if (pw != pwRe) {
+                pwChk.innerHTML = "패스워드가 일치하지 않습니다.";
+                pwChk.style.color = "red";
+                obj.style.border = "1px solid red";
+                pwCheck = false;
+            } else {
+                pwChk.innerHTML = "패스워드가 일치합니다.";
+                pwChk.style.color = "#1f4787";
+                obj.style.border = "1px solid #1f4787";
+                pwCheck = true;
+            }
+        }
+
+        function mailSelect(obj) {
+            var email2 = document.getElementsByName("email2")[0];
+            email2.value = obj.value;
+        }
+
+        function loginFrm() {
+            document.getElementById("loginFrm").style.display = "block";
+        }
+
+        function loginCancel() {
+            document.getElementById("loginFrm").style.display = "none";
+        }
+    </script>
+</body></html>
