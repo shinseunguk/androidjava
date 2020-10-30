@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#b1').click(function() {
+			$.ajax({
+				url : "check.jsp",
+				data : {
+					id : $('#id').val()
+				},
+				success : function(result) {
+					if (result == 0) {
+						//0이면, id가없음
+						//1이면, id가있음
+						$("#d1").html("<h2>사용가능한 id입니다.</h2>")
+					} else {
+						$("#d1").html("<h2>사용불가능한 id입니다.</h2>")
+					}
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	가입할 id 입력 :
+	<input type="text" id="id">
+	<br>
+	<button id="b1">아이디 중복체크</button>
+	<hr>
+	<div id="d1"></div>
+</body>
+</html>

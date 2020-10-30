@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#b1').click(function() {
+		$.ajax({
+			url:"check2.jsp",
+			data: {
+				id: $('#id').val()
+			},
+			success : function(result) {
+				console.log(result)
+					if(result==0){
+						$("#d1").append("<h2>사용가능</h2>")
+					}else{
+						$("#d1").append("<h2>사용불가능</h2>")
+						
+					}//else
+			}//success
+		})//ajax
+		})//b1 click
+		$('#b2').click(function() {
+			$.ajax({
+				url : "reply.jsp",
+				data: {
+					reply: $('#reply').val()
+				},
+				success: function(result){
+					$("#d2").append(result)
+				}//success
+			})//ajax
+		})//b2 click
+		$('#b3').click(function() {
+			$.ajax({
+				url : "img.jsp",
+				data: {
+					reply: $('#reply').val()
+				},
+				success: function(result){
+					$("#d2").append(result)
+				}//success
+			})//ajax
+		})//b2 click
+		$('#b4').click(function() {
+			$.ajax({
+				url : "textimg.jsp",
+				data: {
+					reply: $('#reply').val()
+				},
+				success: function(result){
+					$("#d2").append(result)
+				}//success
+			})//ajax
+		})//b2 click
+	})//function
+</script>
+</head>
+<body>
+	가입할 id 입력 : <input type="text" id="id"><br>
+	<button id="b1" >아이디 중복체크 </button>
+	<hr>
+	<div id="d1">
+	</div>
+	<hr>
+	댓글 텍스트 입력: <input type="text" id="reply">
+	<button id="b2">댓글달기(텍스트)</button>
+	<button id="b3">댓글달기(이미지)</button>
+	<button id="b4">댓글달기(텍스트+이미지)</button>
+	<hr>
+	<div id="d2">
+	</div>
+</body>
+</html>

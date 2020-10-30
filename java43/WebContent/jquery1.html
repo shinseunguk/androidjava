@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	function food(time) {
+		/* 매개변수, 파라미터 */
+		/* 처리하는데 있어 입력값의 역할 */
+		console.log(time + '시에 아침을 먹었어요 확인함')
+		if(time >= 8){
+			console.log('지각o')
+		}else{
+			console.log('지각x')
+		}
+		/* return "ok"; */
+	}
+</script>
+</head>
+<body>
+	<button onclick="food(8)">기능 처리가 함수 중심으로 처리가 됨</button>
+</body>
+</html>

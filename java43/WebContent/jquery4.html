@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#b1').click(function() {
+		$.ajax({
+			url : "call2.jsp",
+			data :{
+				score : $('#score').val()			
+			},
+			success : function(result){
+				console.log("받은데이터 : "+result);
+				if(result =='최우수' || result=='우수') {
+					alert("통과");
+				}else{
+					alert("재시험");
+				}
+			}
+		})
+	})	
+})
+</script>
+</head>
+<body>
+<h2>성적입력</h2>
+성적 : <input type="text" id="score">
+<button id="b1">결과</button>
+</body>
+</html>

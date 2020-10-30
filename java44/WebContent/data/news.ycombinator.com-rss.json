@@ -1,0 +1,133 @@
+{
+    "status": "ok",
+    "feed": {
+        "url": "https://news.ycombinator.com/rss",
+        "title": "Hacker News",
+        "link": "https://news.ycombinator.com/",
+        "author": "",
+        "description": "Links for the intellectually curious, ranked by readers.",
+        "image": ""
+    },
+    "items": [
+        {
+            "title": "Missing Covid-19 test data was caused by the ill-thought-out use of Excel",
+            "pubDate": "2020-10-05 16:30:15",
+            "link": "https://www.bbc.com/news/technology-54423988",
+            "guid": "b36cfaa085d41edbc3e98ced5a838611",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24689247\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24689247\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "What you could steal from the Kakoune code editor, and get away with",
+            "pubDate": "2020-10-05 07:07:36",
+            "link": "https://kakoune-editor.github.io/community-articles/2020/10/01/what_steal_get_away_kakoune.html",
+            "guid": "56f1191a1a206207c704ace7fb227478",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24685267\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24685267\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "Full-Bleed Layout Using CSS Grid",
+            "pubDate": "2020-10-05 15:42:47",
+            "link": "https://www.joshwcomeau.com/css/full-bleed/",
+            "guid": "56d8b91dbdd8d2ba79891e904b6e799d",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24688736\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24688736\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "Kube Doom, Kill Kubernetes Pods Using Id's Doom",
+            "pubDate": "2020-10-05 18:47:22",
+            "link": "https://github.com/storax/kubedoom",
+            "guid": "cb4219acbafc23845c843c14063437a4",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24690690\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24690690\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "Programmable Search Engine",
+            "pubDate": "2020-10-05 21:21:47",
+            "link": "https://programmablesearchengine.google.com/about/",
+            "guid": "715dd6489371de1f5b05aa075f426818",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24692201\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24692201\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "Diagram Maker: Open sourcing IoT visualization",
+            "pubDate": "2020-10-05 15:54:24",
+            "link": "https://aws.amazon.com/blogs/opensource/diagram-maker-open-sourcing-iot-visualization/",
+            "guid": "ca15c87810ceec74d60632a7e6605d39",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24688860\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24688860\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "How we built a $1m ARR SaaS startup",
+            "pubDate": "2020-10-05 16:39:24",
+            "link": "https://canny.io/blog/how-we-built-a-1m-arr-saas-startup/",
+            "guid": "8adeb05a4dc2da944125da9953953e8d",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24689339\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24689339\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "Science Fiction Stories with Good Astronomy and Physics: A Topical Index",
+            "pubDate": "2020-10-05 10:14:39",
+            "link": "https://astrosociety.org/file_download/inline/621a63fc-04d5-4794-8d2b-38e7195056e9",
+            "guid": "a154d5adf2aa5b42fbd48a1ebd8f9e1e",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24686247\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24686247\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "Venice holds back the water for first time in 1,200 years",
+            "pubDate": "2020-10-05 11:30:13",
+            "link": "https://www.cnn.com/travel/article/venice-flood-barrier/index.html",
+            "guid": "a22c8b7fb5420ff008464e5eebaf857e",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24686646\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24686646\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        },
+        {
+            "title": "Tesla hacker reveals what driver-facing camera is looking for",
+            "pubDate": "2020-10-05 15:08:49",
+            "link": "https://electrek.co/2020/10/04/tesla-hacker-driver-facing-camera-looking-for/",
+            "guid": "2f4fe497897728d3b584eb19069a41fd",
+            "author": "",
+            "thumbnail": "",
+            "description": "<a href=\"https://news.ycombinator.com/item?id=24688416\">Comments</a>",
+            "content": "<a href=\"https://news.ycombinator.com/item?id=24688416\">Comments</a>",
+            "enclosure": {},
+            "categories": []
+        }
+    ]
+}

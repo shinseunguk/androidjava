@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#b1').click(function() {
+			$.ajax({
+				url:"check3.jsp",
+				data: {
+					i1: $('#i1').val(),
+					i2: $('#i2').val()
+				},
+				success : function(result) {
+					$('#d1').append(result)
+				}//success
+			})//ajax
+			})//b1 click
+			$('#b2').click(function() {
+				$.ajax({
+					url:"check4.jsp",
+					data: {
+						i3: $('#i3').val()
+					},
+					success : function(result) {
+						$('#d2').append(result)
+					}//success
+				})//ajax
+				})//b2 click
+				$('#id').keyup(function() {
+					$.ajax({
+						url:"check5.jsp",
+						data: {
+							id: $('#id').val()
+						},
+						success : function(result) {
+							$('#d3').html(result)
+						}//success
+					})//ajax
+					})//b3 click
+					
+					$('#pw2').keyup(function() {
+						$.ajax({
+							url:"check6.jsp",
+							data: {
+								pw1: $('#pw1').val(),
+								pw2: $('#pw2').val()
+							},
+							success : function(result) {
+								$('#d4').html(result)
+							}//success
+						})//ajax
+						})//b4 click
+	})
+</script>
+</head>
+<body>
+	결제금액 :
+	<input type="text" id="i1">
+	<br> 결제수단 :
+	<input type="text" placeholder="1)계좌이체, 2)신용카드, 3)휴대폰결제" id="i2">
+	<button id="b1">결제하기</button>
+	<br> 인증받을 전화번호입력:
+	<input type="text" id="i3">
+	<button id="b2">인증번호 받기</button>
+	<hr>
+	<div id="d1"></div><br>
+	<div id="d2"></div><hr>
+	id : <input type="text" id="id" placeholder="5글자이상 입력"><br>
+	<p id="d3"></p><br>
+	pw : <input type="text" id="pw1" placeholder="비밀번호 입력"><br>
+	pwchk : <input type="text" id="pw2" placeholder="비밀번호 재입력"><br><br>
+	<p id="d4"></p><hr>
+</body>
+</html>

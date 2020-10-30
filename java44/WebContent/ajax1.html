@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	//call-back 함수
+	//특정한 이벤트를 기다렸다가 그 이벤트가 발생하면
+	//함수가 정의되어있는 곳으로 돌아가 자동 호출되는 함수
+	//body의 하위 엘리먼트를 먼저 브라우저가 dom-tree를 구성한 후
+	//콜백함수를 정의하게 되어있음.
+	//브라우저가 스크립트를 먼저 실행하고 인식하는것이 아니라
+	//body부분을 먼저 읽어서 dom-tree를 만들도록 해야함
+	$(function() {
+		$('#b1').click(function() {
+			$.ajax({
+				url: "data/member.xml", // ajax를 이용하여 member.xml 연결 
+				success: function(doc) {
+					console.log('xml요청 성공')
+					console.log('xml결과 : ' + doc)
+					list = $(doc).find('record') //record태그 찾아서 list변수에 넣기
+					console.log('레코드의 개수 : ' + list.length) // length 함수를 이용하여 레코드의 개수를 count
+					if(list.length > 0){ //list의 길이가 0 초과 -> if문 실행
+						$(list).each(function() { // $().each ->object 와 배열 모두에서 사용할수있는 반복 함수
+							id = $(this).find('id').text() // list의 id태그를 찾고 text를 id에 저장
+							first_name = $(this).find('first_name').text()// list의 first_name태그를 찾고 text를 id에 저장
+							last_name = $(this).find('last_name').text()// list의 last_name태그를 찾고 text를 id에 저장
+							email = $(this).find('email').text()// list의 email태그를 찾고 text를 id에 저장
+							gender = $(this).find('gender').text()// list의 gender태그를 찾고 text를 id에 저장
+							ip_address = $(this).find('ip_address').text()// list의 ip_address태그를 찾고 text를 id에 저장
+							console.log('성 : ' + first_name) // 콘솔에 찍어내는 작업
+							console.log('이름 : ' + last_name)
+							console.log('이메일 : ' + email)
+							console.log('성별 : ' + gender)
+							console.log('아이피 : ' + ip_address)
+							
+							$('#d1').append('아이디 : '+id+'<br>') // div에 추가하여 웹페이지 상에 나타내는 작업
+							$('#d1').append('성 : '+first_name+'<br>')
+							$('#d1').append('이름 : '+last_name+'<br>')
+							$('#d1').append('이메일 : '+email+'<br>')
+							$('#d1').append('성별 : '+gender+'<br>')
+							$('#d1').append('아이피 : '+ip_address+'<br><br>')
+							$.ajax({ //ajax 재연결 db처리 하기위함
+								url: "db1.jsp", //db1.jsp 연결
+								data : { // 변수 보내주기
+									id: id, // 왼쪽은 보낼 변수 오른쪽은 ajax1.html 의 기존변수
+									first_name: first_name,
+									last_name: last_name,
+									email : email,
+									gender : gender,
+									ip_address : ip_address
+								},
+								success: function(result) { // ajax 연결 성공시
+									console.log('db1.jsp를 통해서 db에 넣기') // console문을 이용하여 확인
+									console.log('db1.jsp의 결과: ' + result) // reuslt 값으로 true, false 반환값 받기
+								}
+								
+							})
+						})
+					}
+				}
+			})
+		})
+		$('#b2').click(function() {
+			$.ajax({
+				url: "data/member.json",
+				success: function(doc) {
+					//alert('json요청성공')
+					console.log(doc)
+					$(doc).each(function(index, item) {
+						id = item.id, // 왼쪽은 보낼 변수 오른쪽은 ajax1.html 의 기존변수
+						first_name=  item.first_name,
+						last_name=  item.last_name,
+						email =  item.email,
+						gender =  item.gender,
+						ip_address =  item.ip_address
+						$('#d1').append('아이디 : '+id+'<br>') // div에 추가하여 웹페이지 상에 나타내는 작업
+						$('#d1').append('성 : '+first_name+'<br>')
+						$('#d1').append('이름 : '+last_name+'<br>')
+						$('#d1').append('이메일 : '+email+'<br>')
+						$('#d1').append('성별 : '+gender+'<br>')
+						$('#d1').append('아이피 : '+ip_address+'<br><br>')
+					})
+					
+				}
+		})
+		})
+		$('#b3').click(function() {
+			
+		})
+	})
+
+</script>
+</head>
+<body>
+<button id="b1">XML읽어오기</button>
+<button id="b2">json읽어오기</button>
+<button id="b3">db에 넣기</button>
+<hr color="red">
+<div id="d1"></div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#b1').click(function() {
+			$.ajax({ /* 비동기통신 */
+				url: "call.jsp",
+				data: {
+					age: $('#age').val()
+				},
+				success: function(result) {
+					alert("성공");
+					console.log("받은 데이터 :" + result)
+					if (result =='성인') {
+						location.href="http://www.naver.com"
+					}else{
+						alert('미성인이신구요 ! 부모의 동의가 필요합니다..')
+					}
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	가입할 id 입력 <input type="text" id="id">
+	<button id="b1">아이디 중복 </button>
+</body>
+</html>

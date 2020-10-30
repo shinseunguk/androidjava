@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+ <body>
+  <div id="map" style="width: 1000px; height: 1000px;"></div>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvRVhj_HUmmuiQTEqtU804dx_MIa-7qac&callback=initMap&region=kr"></script>
+  <script>
+  var locations=[
+	  ['37.554907', '126.936015'],
+	  ['37.558987', '126.936015'],
+	  ['37.534567', '126.936015']
+  ];
+  
+  
+  
+    function initMap() {
+      var seoul = { lat: 37.554907 ,lng: 126.936015 };
+      var map = new google.maps.Map(
+        document.getElementById('map'), {
+          zoom: 13,
+          center: seoul
+        });
+      var marker, i;
+      for (i = 0; i < locations.length; i++) {  
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+            map: map
+          });
+      
+    }
+    }
+  </script>
+  </body>
+  </html>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 네트워크로 연결된 노드간 많은 데이터 전달 목적으로 데이터 앞에 키를 도해ㅑ 값을 명시하는 역할-->
+<result>
+<total>10000</total>
+<data>2020.10.05</data>
+<fields>신용카드</fields>
+<name>홍길동</name>
+</result>
